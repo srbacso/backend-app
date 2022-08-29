@@ -49,7 +49,6 @@ func (app *application) getAllGenres(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-
 	err = app.writeJSON(w, http.StatusOK, genres, "genres")
 	if err != nil {
 		app.errorJSON(w, err)
@@ -79,18 +78,34 @@ func (app *application) getAllMoviesByGenre(w http.ResponseWriter, r *http.Reque
 	}
 }
 
+func (app *application) editmovie(w http.ResponseWriter, r *http.Request) {
+	type jsonResp struct {
+		OK bool `json: "ok"`
+	}
+
+	ok := jsonResp{
+		OK: true,
+	}
+
+	err := app.writeJSON(w, http.StatusOK, ok, "response")
+	if err != nil {
+		app.errorJSON(w, err)
+		return
+	}
+}
+
 func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 
 }
 
 func (app *application) insertMovie(w http.ResponseWriter, r *http.Request) {
-	
+
 }
 
 func (app *application) updateMovie(w http.ResponseWriter, r *http.Request) {
-	
+
 }
 
 func (app *application) searchMovies(w http.ResponseWriter, r *http.Request) {
-	
+
 }
