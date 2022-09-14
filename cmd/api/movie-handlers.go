@@ -88,7 +88,8 @@ func (app *application) getAllMoviesByGenre(w http.ResponseWriter, r *http.Reque
 }
 
 func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
-	params := httprouter.ParamsFromContext(r.Context())
+	// params := httprouter.ParamsFromContext(r.Context())
+	params := r.Context().Value("params").(httprouter.Params)
 
 	id, err := strconv.Atoi(params.ByName("id"))
 	if err != nil {
@@ -103,8 +104,7 @@ func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ok := jsonResp{
-		OK:      true,
-		Message: "Movie Deleted",
+		OK: true,
 	}
 
 	err = app.writeJSON(w, http.StatusOK, ok, "response")
@@ -174,8 +174,7 @@ func (app *application) editMovie(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ok := jsonResp{
-		OK:      true,
-		Message: "Movie Updated",
+		OK: true,
 	}
 
 	err = app.writeJSON(w, http.StatusOK, ok, "response")
